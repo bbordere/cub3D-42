@@ -6,13 +6,13 @@
 #    By: bbordere <bbordere@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 08:53:24 by tdesmet           #+#    #+#              #
-#    Updated: 2022/10/25 14:25:31 by bbordere         ###   ########.fr        #
+#    Updated: 2023/10/30 13:11:31 by bbordere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -I includes/ -Wall -Werror -Wextra -g3 -I./libft/includes -I./mlx_linux/
+CFLAGS = -I includes/ -Wall -Werror -Wextra -g3 -I./libft/includes -I./minilibx-linux/
 
 FILES = 	src/raycasting/floor.c\
 			src/raycasting/ray.c\
@@ -92,31 +92,31 @@ endif
 
 %.o: %.c $(DEPS)
 	@printf "\033[0;33mCompiling file: %-33.33s\r" $@
-	@$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -c $< -o $@
+	@$(CC) $(CFLAGS) -I/usr/include -Iminilibx-linux -c $< -o $@
 
 $(NAME): $(OBJS) 
 	@ $(MAKE) -C libft all --no-print-directory -s
-	@ $(MAKE) -C mlx_linux/ all -s
-	@ $(CC) $(CFLAGS) $(OBJS) libft/libft.a mlx_linux/libmlx.a -lXext -lX11 -lm -o $(NAME) 
+	@ $(MAKE) -C minilibx-linux/ all -s
+	@ $(CC) $(CFLAGS) $(OBJS) libft/libft.a minilibx-linux/libmlx.a -lXext -lX11 -lm -o $(NAME) 
 	@ printf '\033[0;32mcompilation done\033[0m\n'
 
 all: $(NAME)
 	@ $(MAKE) -C libft all --no-print-directory -s
-	@ $(MAKE) -C mlx_linux/ all -s
-	@ $(CC) $(CFLAGS) $(OBJS) libft/libft.a mlx_linux/libmlx.a -lXext -lX11 -lm -o $(NAME)
+	@ $(MAKE) -C minilibx-linux/ all -s
+	@ $(CC) $(CFLAGS) $(OBJS) libft/libft.a minilibx-linux/libmlx.a -lXext -lX11 -lm -o $(NAME)
 	@ printf '\033[0;32mcompilation done\033[0m\n'
 
 bonus: $(BDEPS) $(BOBJS)
 	@ $(MAKE) -C libft all --no-print-directory -s
-	@ $(MAKE) -C mlx_linux/ all -s
-	@ $(CC) $(CFLAGS) $(BOBJS) libft/libft.a mlx_linux/libmlx.a -lXext -lX11 -lm -o $(BNAME)
+	@ $(MAKE) -C minilibx-linux/ all -s
+	@ $(CC) $(CFLAGS) $(BOBJS) libft/libft.a minilibx-linux/libmlx.a -lXext -lX11 -lm -o $(BNAME)
 	@ printf '\033[0;32mcompilation done\033[0m\n'
 
 clean:
 	@ rm -f $(OBJS)
 	@ rm -f $(BOBJS)
 	@ $(MAKE) -C libft clean --no-print-directory -s
-	@ $(MAKE) -C mlx_linux/ clean --no-print-directory -s
+	@ $(MAKE) -C minilibx-linux/ clean --no-print-directory -s
 	@ printf '\033[0;32mclean done\033[0m\n'
 
 fclean: clean
